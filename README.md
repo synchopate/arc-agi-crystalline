@@ -4,23 +4,19 @@
 
 | Metric | Score |
 |--------|-------|
-| **Levels Completed** | **170/183 (92.9%)** |
-| **Games Won (all levels)** | **20/25 (80%)** |
-| **RHAE (efficiency)** | **103.4%** |
-
-Every solved level is completed faster than the human baseline (capped at 115% per level).
+| **Levels Completed** | **164/183 (89.6%)** |
+| **Games Won (all levels)** | **19/25 (76%)** |
 
 ### Comparison
 
-| System | RHAE | Method |
-|--------|------|--------|
-| **Opus 4.6 + Crystalline** | **103.4%** | Cognitive memory + parallel agents |
-| Human Baseline | 100% | First-time human players |
-| ARC-SAGE | 94.85%* | Multi-agent frame-questioning |
-| Read-Grep-Bash Agent | 82.4%* | Coding agent with search |
+| System | Levels | Method |
+|--------|--------|--------|
+| **Opus 4.6 + Crystalline** | **164/183 (19 WIN)** | Cognitive memory + parallel agents |
+| ARC-SAGE | ~94.85%* | Multi-agent frame-questioning |
+| Read-Grep-Bash Agent | ~82.4%* | Coding agent with search |
 | Frontier AI (model alone) | 0.51% | Direct LLM prompting |
 
-*Completion-based scores, not RHAE.
+*Completion-based scores.
 
 ## Architecture
 
@@ -81,33 +77,33 @@ Knowledge transfers between games:
 
 ## Per-Game Results
 
-| Game | Score | Type | RHAE |
-|------|-------|------|------|
-| tu93 | 9/9 WIN | Pac-Man maze + 3 enemy types | 115% |
-| su15 | 9/9 WIN | Merge matching + enemy luring | 115% |
-| lf52 | 10/10 WIN | Peg solitaire + slider transport | 115% |
-| sb26 | 8/8 WIN | Color-matching with recursive portals | 115% |
-| ar25 | 8/8 WIN | Reflection/mirror symmetry | 115% |
-| sk48 | 8/8 WIN | Track/chain sliding puzzle | 115% |
-| s5i5 | 8/8 WIN | Bar/pipe rotation puzzle | 115% |
-| lp85 | 8/8 WIN | Multi-gear circular track | 115% |
-| ka59 | 7/7 WIN | Sliding puzzle with bombs | 115% |
-| tn36 | 7/7 WIN | Programming with opcodes + checkpoints | 115% |
-| ls20 | 7/7 WIN | Modifier maze with moving elements | 115% |
-| vc33 | 7/7 WIN | Water sort with gravity + buttons | 115% |
-| r11l | 6/6 WIN | Piece arrangement + collectibles | 115% |
-| cd82 | 6/6 WIN | Canvas painting (basket rotation) | 115% |
-| tr87 | 6/6 WIN | Cyclic pattern matching + rule chains | 115% |
-| cn04 | 6/6 WIN | Jigsaw marker matching | 115% |
-| m0r0 | 6/6 WIN | Mirror-symmetry maze + switches | 115% |
-| ft09 | 6/6 WIN | Lights Out (GF(p) algebra) | 115% |
-| sc25 | 6/6 WIN | Wizard spell-casting maze | 115% |
-| sp80 | 6/6 WIN | Liquid/deflector puzzle | 115% |
-| re86 | 7/8 | Color changer navigation | 89.4% |
-| g50t | 5/7 | Clone recording + pressure plates | 61.6% |
-| bp35 | 6/9 | Gravity platformer | 53.7% |
-| dc22 | 4/6 | Crane puzzle (all frontier AI = 0%) | 54.8% |
-| wa30 | 4/9 | NPC relay delivery | 25.6% |
+| Game | Score | Type |
+|------|-------|------|
+| tu93 | 9/9 WIN | Pac-Man maze + 3 enemy types |
+| su15 | 9/9 WIN | Merge matching + enemy luring |
+| sb26 | 8/8 WIN | Color-matching with recursive portals |
+| ar25 | 8/8 WIN | Reflection/mirror symmetry |
+| sk48 | 8/8 WIN | Track/chain sliding puzzle |
+| s5i5 | 8/8 WIN | Bar/pipe rotation puzzle |
+| lp85 | 8/8 WIN | Multi-gear circular track |
+| ka59 | 7/7 WIN | Sliding puzzle with bombs |
+| tn36 | 7/7 WIN | Programming with opcodes + checkpoints |
+| ls20 | 7/7 WIN | Modifier maze with moving elements |
+| vc33 | 7/7 WIN | Water sort with gravity + buttons |
+| r11l | 6/6 WIN | Piece arrangement + collectibles |
+| cd82 | 6/6 WIN | Canvas painting (basket rotation) |
+| tr87 | 6/6 WIN | Cyclic pattern matching + rule chains |
+| cn04 | 6/6 WIN | Jigsaw marker matching |
+| m0r0 | 6/6 WIN | Mirror-symmetry maze + switches |
+| ft09 | 6/6 WIN | Lights Out (GF(p) algebra) |
+| sc25 | 6/6 WIN | Wizard spell-casting maze |
+| sp80 | 6/6 WIN | Liquid/deflector puzzle |
+| re86 | 7/8 | Color changer navigation |
+| lf52 | 7/10 | Peg solitaire + slider transport |
+| g50t | 5/7 | Clone recording + pressure plates |
+| dc22 | 4/6 | Crane puzzle (all frontier AI = 0%) |
+| wa30 | 4/9 | NPC relay delivery |
+| bp35 | 3/9 | Gravity platformer |
 
 ## Key Principles Discovered
 
@@ -127,10 +123,8 @@ Knowledge transfers between games:
 
 | Metric | Without | With Crystalline |
 |--------|---------|-----------------|
-| ARC-AGI-2 | 80% | 90% (+10%) |
 | ARC-AGI-3 (frontier model alone) | 0.51% | — |
-| ARC-AGI-3 (with Crystalline) | — | 103.4% RHAE |
-| **Multiplier** | | **203x** |
+| ARC-AGI-3 (with Crystalline) | — | 164/183 levels, 19 WIN |
 
 Crystalline doesn't memorize solutions — every game is solved from scratch. It memorizes *why things fail* and *how to overcome them*. It's the permanent residue of fluid reasoning — crystallized intelligence.
 
@@ -142,6 +136,7 @@ Crystalline doesn't memorize solutions — every game is solved from scratch. It
 
 ## Contact
 
+- Author: Paolo C
 - GitHub: [@synchopate](https://github.com/synchopate)
 
 ---
