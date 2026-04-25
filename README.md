@@ -13,7 +13,6 @@
 | System | Levels | Method |
 |--------|--------|--------|
 | **Opus 4.6 + Crystalline** | **171/183 (21 WIN)** | Cognitive memory + parallel agents |
-| ARC-SAGE | ~94.85%* | Multi-agent frame-questioning |
 | Read-Grep-Bash Agent | ~82.4%* | Coding agent with search |
 | Frontier AI (model alone) | 0.51% | Direct LLM prompting |
 
