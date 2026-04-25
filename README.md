@@ -4,14 +4,15 @@
 
 | Metric | Score |
 |--------|-------|
-| **Levels Completed** | **164/183 (89.6%)** |
-| **Games Won (all levels)** | **19/25 (76%)** |
+| **Levels Completed** | **171/183 (93.4%)** |
+| **Games Won (all levels)** | **21/25 (84%)** |
+| **RHAE (efficiency)** | **~102.3%** |
 
 ### Comparison
 
 | System | Levels | Method |
 |--------|--------|--------|
-| **Opus 4.6 + Crystalline** | **164/183 (19 WIN)** | Cognitive memory + parallel agents |
+| **Opus 4.6 + Crystalline** | **171/183 (21 WIN)** | Cognitive memory + parallel agents |
 | ARC-SAGE | ~94.85%* | Multi-agent frame-questioning |
 | Read-Grep-Bash Agent | ~82.4%* | Coding agent with search |
 | Frontier AI (model alone) | 0.51% | Direct LLM prompting |
