@@ -10,13 +10,11 @@
 
 ### Comparison
 
-| System | Levels | Method |
-|--------|--------|--------|
-| **Opus 4.6 + Crystalline** | **180/183 (23 WIN)** | Cognitive memory + parallel agents |
-| Read-Grep-Bash Agent | ~82.4%* | Coding agent with search |
+| System | Score | Method |
+|--------|-------|--------|
+| **Opus 4.6 + Crystalline** | **97.69% (23 WIN)** | Cognitive memory + parallel agents |
+| Read-Grep-Bash Agent | 82.43% | Coding agent with search |
 | Frontier AI (model alone) | 0.51% | Direct LLM prompting |
-
-*Completion-based scores.
 
 ## Architecture
 
@@ -50,15 +48,15 @@ Phase 3 — MODEL (15 min)
 
 Phase 4 — SOLVE
   Select strategy by game structure:
-  - LINEAR ALGEBRA: Lights Out variants → Gaussian elimination (ft09)
-  - CONSTRAINT SATISFACTION: matching puzzles → backtracking (cn04, sb26)
-  - BFS/A*: maze/movement puzzles → shortest path search (tu93, m0r0)
-  - PLANNING: multi-step assembly → sequential move planning (r11l, s5i5)
-  - PROGRAMMING: instruction encoding → opcode search (tn36, cd82)
+  - LINEAR ALGEBRA: Lights Out variants -> Gaussian elimination (ft09)
+  - CONSTRAINT SATISFACTION: matching puzzles -> backtracking (cn04, sb26)
+  - BFS/A*: maze/movement puzzles -> shortest path search (tu93, m0r0)
+  - PLANNING: multi-step assembly -> sequential move planning (r11l, s5i5)
+  - PROGRAMMING: instruction encoding -> opcode search (tn36, cd82)
 
 Phase 5 — EXECUTE
   Replay solution on SDK. Verify levels_completed increases.
-  If mismatch → model is wrong, return to Phase 2.
+  If mismatch -> model is wrong, return to Phase 2.
 ```
 
 ### The Retry Multiplier
@@ -70,10 +68,10 @@ First attempts discover mechanics and fail on hard levels. Crystalline stores *w
 ### Cross-Domain Transfer
 
 Knowledge transfers between games:
-- Camera scaling discovered on vc33 → prevented same bug on all 24 subsequent games
-- "SDK BFS is slow" learned once → all games used pure simulation from the start
-- "500K states insufficient" from lp85 → s5i5 retry used 1M+ limit and won
-- Algebraic insight from ft09 → checked structure in every subsequent game
+- Camera scaling discovered on vc33 -> prevented same bug on all 24 subsequent games
+- "SDK BFS is slow" learned once -> all games used pure simulation from the start
+- "500K states insufficient" from lp85 -> s5i5 retry used 1M+ limit and won
+- Algebraic insight from ft09 -> checked structure in every subsequent game
 
 ## Per-Game Results
 
@@ -81,15 +79,18 @@ Knowledge transfers between games:
 |------|-------|------|
 | tu93 | 9/9 WIN | Pac-Man maze + 3 enemy types |
 | su15 | 9/9 WIN | Merge matching + enemy luring |
+| lf52 | 10/10 WIN | Peg solitaire + slider transport (viewport-constrained BFS) |
 | sb26 | 8/8 WIN | Color-matching with recursive portals |
 | ar25 | 8/8 WIN | Reflection/mirror symmetry |
 | sk48 | 8/8 WIN | Track/chain sliding puzzle |
 | s5i5 | 8/8 WIN | Bar/pipe rotation puzzle |
 | lp85 | 8/8 WIN | Multi-gear circular track |
+| re86 | 8/8 WIN | Color changer navigation |
 | ka59 | 7/7 WIN | Sliding puzzle with bombs |
 | tn36 | 7/7 WIN | Programming with opcodes + checkpoints |
 | ls20 | 7/7 WIN | Modifier maze with moving elements |
 | vc33 | 7/7 WIN | Water sort with gravity + buttons |
+| g50t | 7/7 WIN | Clone recording + pressure plates |
 | r11l | 6/6 WIN | Piece arrangement + collectibles |
 | cd82 | 6/6 WIN | Canvas painting (basket rotation) |
 | tr87 | 6/6 WIN | Cyclic pattern matching + rule chains |
@@ -98,12 +99,16 @@ Knowledge transfers between games:
 | ft09 | 6/6 WIN | Lights Out (GF(p) algebra) |
 | sc25 | 6/6 WIN | Wizard spell-casting maze |
 | sp80 | 6/6 WIN | Liquid/deflector puzzle |
-| re86 | 7/8 | Color changer navigation |
-| lf52 | 7/10 | Peg solitaire + slider transport |
-| g50t | 5/7 | Clone recording + pressure plates |
-| dc22 | 4/6 | Crane puzzle (all frontier AI = 0%) |
-| wa30 | 4/9 | NPC relay delivery |
-| bp35 | 3/9 | Gravity platformer |
+| dc22 | 6/6 WIN | Crane puzzle (first AI to solve — all frontier AI = 0%) |
+| wa30 | 8/9 | NPC relay delivery (kill saboteur NPCs + reactive solver) |
+| bp35 | 7/9 | Gravity platformer (manual 6-phase gravity-flip) |
+
+## Key Breakthroughs
+
+- **dc22 6/6 WIN** — First AI system to fully solve the crane puzzle. All other frontier AI scored 0%. Required 582K-state BFS with crane attachment state tracking.
+- **lf52 10/10 WIN** — Viewport-constrained BFS with camera scroll tracking. The remote API limits coordinates to [0,63], but the game grid extends beyond. Solved by tracking camera offset in BFS state and exploiting slider-triggered scrolls.
+- **wa30 8/9** — Discovered that NPC Y actively sabotages goals. Strategy: kill both saboteur NPCs first, then let helper NPCs deliver.
+- **bp35 7/9** — L7 solved with manual 6-phase solution tracing toggle-gravity-flip mechanics through 4 zones.
 
 ## Key Principles Discovered
 
@@ -121,17 +126,26 @@ Knowledge transfers between games:
 
 ## The Value of Crystalline
 
-| Metric | Without | With Crystalline |
-|--------|---------|-----------------|
-| ARC-AGI-3 (frontier model alone) | 0.51% | — |
-| ARC-AGI-3 (with Crystalline) | — | 164/183 levels, 19 WIN |
+| Metric | Value |
+|--------|-------|
+| ARC-AGI-3 (frontier model alone) | 0.51% |
+| ARC-AGI-3 (with Crystalline) | **97.69%** |
+| **Multiplier** | **191x** |
 
 Crystalline doesn't memorize solutions — every game is solved from scratch. It memorizes *why things fail* and *how to overcome them*. It's the permanent residue of fluid reasoning — crystallized intelligence.
 
-## Cost Estimate
+## Version History
 
-- ~$50-80 in Claude API calls across all solving sessions
-- ~12 hours of wall-clock time (including retries and optimization)
+| Version | Date | Score | Levels | WIN |
+|---------|------|-------|--------|-----|
+| v1.0 | 2026-04-24 | 86.62% | 164/183 | 19/25 |
+| v1.3 | 2026-04-25 | 92.30% | 173/183 | 21/25 |
+| v2.0 | 2026-04-26 | 97.69% | 180/183 | 23/25 |
+
+## Cost
+
+- ~$120 in Claude API calls across all solving sessions
+- ~14 hours of wall-clock time (including retries and optimization)
 - Hardware: Standard laptop, no GPU required
 
 ## Contact
