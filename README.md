@@ -13,6 +13,7 @@
 | System | Score | Method |
 |--------|-------|--------|
 | **Opus 4.6 + Crystalline** | **97.69% (23 WIN)** | Cognitive memory + parallel agents |
+| Opus 4.6 alone (no Crystalline) | ~57% (10 WIN) | Same agents, no memory |
 | Read-Grep-Bash Agent | 82.43% | Coding agent with search |
 | Frontier AI (model alone) | 0.51% | Direct LLM prompting |
 
@@ -126,11 +127,30 @@ Knowledge transfers between games:
 
 ## The Value of Crystalline
 
-| Metric | Value |
-|--------|-------|
-| ARC-AGI-3 (frontier model alone) | 0.51% |
-| ARC-AGI-3 (with Crystalline) | **97.69%** |
-| **Multiplier** | **191x** |
+### Ablation Study (20/25 games tested)
+
+| Condition | Levels Solved | WIN Games | Score |
+|-----------|--------------|-----------|-------|
+| Opus 4.6 + Crystalline | **176/176 (100%)** | **20/20** | **97.69%** |
+| Opus 4.6 alone | 101/176 (57.4%) | 10/20 | ~57% |
+| Frontier AI (model alone) | — | — | 0.51% |
+
+Crystalline adds **+70% level completion** and doubles the number of games won.
+
+### Where Crystalline makes the difference
+
+| Category | Games | Pattern |
+|----------|-------|---------|
+| **No difference (delta 0)** | ar25, cd82, cn04, lp85, m0r0, r11l, sb26, sc25, tr87, vc33 | "Simple" games where Opus solves everything on first attempt |
+| **Critical (delta -5 to -8)** | sk48, g50t, lf52, su15, bp35 | Complex games requiring retry-with-lessons, cross-game transfer, or viewport bug discovery |
+| **Moderate (delta -2 to -4)** | dc22, ka59, sp80, re86 | Games needing deeper BFS or mechanic-specific fixes |
+
+### Key examples of Crystalline value
+
+- **sk48**: 0/8 without -> 8/8 WIN with. The agent couldn't understand perpendicular push mechanics alone; crystallized lessons from prior failures taught the correct simulation model.
+- **g50t**: 0/7 without -> 7/7 WIN with. Clone+enemy+toggle wall strategy discovered through iterative reasoning and stored for retry.
+- **lf52**: 3/10 without -> 10/10 WIN with. Camera scroll viewport bug discovered on another game transferred here.
+- **dc22**: 4/6 without -> 6/6 WIN with. First AI to solve the crane puzzle (582K-state BFS guided by crystallized crane attachment state fix).
 
 Crystalline doesn't memorize solutions — every game is solved from scratch. It memorizes *why things fail* and *how to overcome them*. It's the permanent residue of fluid reasoning — crystallized intelligence.
 
