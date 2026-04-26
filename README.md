@@ -6,7 +6,7 @@
 |--------|-------|
 | **Levels Completed** | **180/183 (98.4%)** |
 | **Games Won (all levels)** | **23/25 (92%)** |
-| **Score** | **94.49%** |
+| **Score** | **97.69%** |
 
 ### Comparison
 
