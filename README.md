@@ -4,15 +4,15 @@
 
 | Metric | Score |
 |--------|-------|
-| **Levels Completed** | **171/183 (93.4%)** |
-| **Games Won (all levels)** | **21/25 (84%)** |
-| **RHAE (efficiency)** | **~102.3%** |
+| **Levels Completed** | **180/183 (98.4%)** |
+| **Games Won (all levels)** | **23/25 (92%)** |
+| **Score** | **~96.2%** |
 
 ### Comparison
 
 | System | Levels | Method |
 |--------|--------|--------|
-| **Opus 4.6 + Crystalline** | **171/183 (21 WIN)** | Cognitive memory + parallel agents |
+| **Opus 4.6 + Crystalline** | **180/183 (23 WIN)** | Cognitive memory + parallel agents |
 | Read-Grep-Bash Agent | ~82.4%* | Coding agent with search |
 | Frontier AI (model alone) | 0.51% | Direct LLM prompting |
 
